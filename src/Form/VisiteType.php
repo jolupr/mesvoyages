@@ -10,6 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,16 +24,21 @@ class VisiteType extends AbstractType
             ->add('datecreation', DateType::class, [
                 'widget' => 'single_text',
                 'data' => isset($options['data']) &&
-                    $options['data']->getDatecreation() != null ? $options['data']->getDatecreation() : new DateTime('now'),
+                    $options['data']->getDateCreation() != null ? $options['data']->getDateCreation() : new DateTime('now'),
                 'label' => 'Date'
             ])
-            ->add('note')
+            ->add('note', IntegerType::class, [
+                'attr' => [
+                    'min' => 0,
+                    'max' => 20
+                ]
+            ])
             ->add('avis')
             ->add('tempmin', null, [
-                'label' => 'temp min'
+                'label' => 't° min'
             ])
             ->add('tempmax', null, [
-                'label' => 'temp max'
+                'label' => 't° max'
             ])
             ->add('environnements', EntityType::class, [
                 'class' => Environnement::class,
@@ -42,7 +48,7 @@ class VisiteType extends AbstractType
             ])
             ->add('imageFile', FileType::class, [
                 'required' => false,
-                'label' => 'selection image'
+                'label' => 'sélection image'
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer'
