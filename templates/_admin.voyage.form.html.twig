@@ -1,5 +1,4 @@
-
-    {{ form_start(formVisite) }}
+ {{ form_start(formVisite) }}
         <div class="row">
             <div class="col">
                 <div class="row">
@@ -18,6 +17,7 @@
                 </div>
                 {{ form_row(formVisite.ville) }}
                 {{ form_row(formVisite.pays) }}
+                {{ form_row(formVisite.environnements) }}
             </div>
             <div class="col">
             
@@ -28,5 +28,5 @@
                 {{ form_row(formVisite.avis) }}
             </div>
         </div>
-    {{ form_end(formVisite) }}
+{{ form_end(formVisite) }}
 
