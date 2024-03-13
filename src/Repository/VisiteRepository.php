@@ -54,7 +54,7 @@ class VisiteRepository extends ServiceEntityRepository
     
      /**
      * Enregistrements dont un champ est égal à une valeur
-     * ou tous les enregistrements si la valeuur est vide
+     * ou tous les enregistrements si la valeur est vide
      * @param type $champ
      * @param type $valeur
      * @return Visite[]
@@ -73,6 +73,19 @@ class VisiteRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getResult();                   
         }
+    }
+    
+    /**
+     * Retourne les n visites les plus récentes
+     * @param type $nb
+     * @return Visite[]
+     */
+    public function findAllLasted($nb) : array {
+        return $this->createQueryBuilder('v') // alias de la table
+           ->orderBy('v.datecreation', 'DESC')
+           ->setMaxResults($nb)     
+           ->getQuery()
+           ->getResult();
     }
 
 //    /**
